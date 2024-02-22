@@ -75,16 +75,16 @@ const App: React.FC = () => {
   }, []);
 
   if (!data) {
-    return <div>Loading...</div>;
+    return <div>Movies Loading...</div>;
   }
+
 
 
   return (
     <Router>
       <Layout>
         <Routes>
-          {data && <Route path="/" element={<MovieList movies={data}/>} />}
-          {/* <Route path="/movies/:id" element={<MovieList movies={data}/>} /> */}
+          <Route path="/" element={<MovieList movies={data}/>} />
           <Route path="/movies/:id" element={<SingleMovie/>} />
           <Route path='*' element={<NotFound />} />
         </Routes>
