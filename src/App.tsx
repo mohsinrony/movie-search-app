@@ -57,7 +57,7 @@ interface MovieListProps {
   data: Movie[];
 }
 
-const App: React.FC = () => {
+const App: React.FC<MovieListProps> = () => {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
