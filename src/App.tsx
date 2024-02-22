@@ -85,7 +85,7 @@ const App: React.FC = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<MovieList movies={data}/>} />
-          <Route path="/movies/:id" element={<SingleMovie/>} />
+          <Route path="/movies/:id" element={<SingleMovie movieData={data}/>} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Layout>
