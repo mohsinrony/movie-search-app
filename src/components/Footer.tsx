@@ -5,18 +5,19 @@ import {
   faFacebook,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-import imageUrl from "../assets/react.svg";
+import imageUrl from "../assets/logo.png";
 import { Link } from "react-router-dom";
 
 
 const Footer: React.FC = () => {
   return (
     <footer>
-      <div>
+      
         <Link to={"/"}>
-          <img src={imageUrl} height="60px;" width="60px;" alt="Logo" />
+          <img src={imageUrl} height="60px" alt="T3MDB" />
         </Link>
 
+        <div>
         <a href="https://twitter.com">
           <FontAwesomeIcon icon={faTwitter} />
         </a>

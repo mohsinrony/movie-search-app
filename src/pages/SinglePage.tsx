@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import movieData from '../dummy_data/aqua_movies.json'; 
+import { Movie } from '../types';
 import '../styles/SinglePage.css';
+import { Link } from 'react-router-dom';
 
-
-interface Movie {
-  id: number; 
-  name: string; 
-  poster: string;
-  rating: number;
-  year: number;
+// Define the props for the SingleMovie component
+interface Props {
+  movieData: Movie[]; // Declare movieData as an array of Movie objects
+  relatedMovies: Movie[]; // Declare relatedMovies as an array of Movie objects
 }
 
 
-const SingleMovie: React.FC = () => {
+const SingleMovie: React.FC<Props> = ({movieData, relatedMovies}) => {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<Movie | null>(null);
 
   useEffect(() => {
    
-    const selectedMovie = movieData.results.find(movie => movie.id.toString() === id);
+    const selectedMovie = movieData.find(movie => movie.id.toString() === id);
     if (selectedMovie) {
       const { id, name, poster, rating, year } = selectedMovie;
  
@@ -37,6 +35,24 @@ const SingleMovie: React.FC = () => {
       <h1 className='movie-title'>{movie.name}</h1>
       <p className='movie-info'>{movie.year}</p>
       <p className='movie-info'>{movie.rating}</p>
+      <hr />
+      {/* RELATED MOVIES 
+      https://unelmamovie.com/api/v1/titles/{id}/related */}
+      {relatedMovies.length && (
+        <div className='singlePageRelated'>
+          <h2>Similar Movies</h2>
+          <div style={{ display: "flex", gridGap:"1rem", flexDirection: "row" }}>
+          {relatedMovies.map((movie) => (
+            <Link to={`/movies/${movie.id}`} key={movie.id}>
+              <img className='movie-poster' src={movie.poster} alt={movie.name} style={{width:"200px"}}/>
+              <h6 className='movie-title'>{movie.name}</h6>
+              <p className='movie-info'>{movie.year}</p>
+              <p className='movie-info'>{movie.rating}</p>
+            </Link>
+          ))}
+          </div>
+        </div>
+      )}
     
     </div>
   );
