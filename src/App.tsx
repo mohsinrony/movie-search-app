@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import MovieList from './components/MovieList';
 import SingleMovie from './pages/SinglePage';
+import MovieList2 from './components/MovieList2';
 
 
 interface LayoutProps {
@@ -63,7 +64,7 @@ const App: React.FC<MovieListProps> = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://unelmamovie.com/api/v1/titles?page=1');
+        const response = await axios.get('https://unelmamovie.com/api/v1/titles?page=1&perPage=18&type=movie&language=en&onlyStreamable=true&includeAdult=true');
         const dataArray = response.data.pagination.data;
         setData(dataArray);
       } catch (error) {
@@ -85,7 +86,8 @@ const App: React.FC<MovieListProps> = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<MovieList movies={data}/>} />
-          <Route path="/movies/:id" element={<SingleMovie movieData={data}/>} />
+          <Route path="/movies" element={<MovieList2 movies={data}/>} />
+          <Route path="/movies/:id" element={<SingleMovie movieData={data} relatedMovies={data}/>} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Layout>

@@ -66,3 +66,166 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Styles for movie-list */
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 auto !important;
+}
+
+.topBar {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.moviePoster{
+  aspect-ratio: 2/3;
+  object-fit:cover;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.topBar .material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+  font-size: 3.5rem;
+  cursor: pointer;
+}
+
+
+/* Styles for list view */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+.list-item .movie-details {
+  margin-top: 0;
+}
+
+.list-item a img {
+  width: 200px;
+  aspect-ratio: 2/3;
+  border-radius: 0.5rem;
+}
+
+.list-item .movie-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.list-item .movie-details h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.list-item .movie-details p {
+  margin: 0;
+  text-align: justify;
+  font-size: 1.25rem;
+}
+
+/* Styles for grid view */
+.movie-list  {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.movie-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+/* Styles for header */
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ccc;
+  color: #fff;
+}
+
+/* Styles for searchBar */
+.searchBar {
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Styles for mainNav */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: none;
+  color: #fff;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  list-style: none;
+}
+
+nav ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+/* Styles for footer */
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ccc;
+  color: #fff;
+  height: fit-content;
+  margin-top: 1rem;
+}
+
+footer a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
