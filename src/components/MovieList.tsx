@@ -1,43 +1,54 @@
 import React, {useEffect} from 'react';
-import { Link } from 'react-router-dom';
-import { Movie } from '../types';
+import MovieItem from './MovieItem';
+//import { Movie } from '../types';
+import axios from 'axios';
 import '../styles/MovieList.css';
 
-
-// Define the Movie interface
-interface MovieListProps {
-  movies: Movie[];
-}
-
-const MovieList: React.FC<MovieListProps> = ({ movies }) => {
+const MovieList: React.FC = () => {
+  const [movies, setMovies] = React.useState<any[]>([]);
   useEffect(() => {
     document.title = 'Movies | T3 MovieDB App';
   }, []);
   
-{/*
-#SORTING: BY NAME, YEAR, RATING, POPULARITY
-#FILTER: BY GENRE, YEAR, RATING (1-10), POPULARITY, LANGUAGE, COUNTRY
-#GRID/LIST VIEW
-*/}
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            let url = `https://api.themoviedb.org/3/discover/movie?page=1&sort_by=vote_average.desc`;
+
+            const options = {
+              method: 'GET',
+              headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZTkzNzBjM2JlZTIzMjZkNzJlZjBhNGVmMTVhZDgyMCIsInN1YiI6IjY1ZGNlNTAxMzk1NDlhMDE4NzRlODBkMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fR4QEHaqcwD8TTvWCVQSrO241D6m2HBFL1rCW2prTSo'
+              }
+            };
+
+            const response = await axios.get(url, options);
+            const dataArray = response.data.results;
+            setMovies(dataArray);
+            
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    
+
+    fetchData();
+}, []);
 
   return (
     <div>
-      <h1>Hero Banner Can Be Here!</h1>
+      {/* <h1>Hero Banner Can Be Here!</h1> */}
 
       <div className="movie-list">
         {movies.length === 0 ? (
           <h2>No Movies Found</h2>
         ) : (
-          movies.map(movie => (
-            <div key={movie.id} className="movie-item">
-              <Link to={`/movies/${movie.id}`}>
-                {movie.poster && <img src={movie.poster} alt={movie.name} />}
-                <h2>{movie.name}</h2>
-                <p>{movie.year}</p>
-                <p>{movie.rating}</p>
-              </Link>
-            </div>
+        
+          movies && movies.map((movie: any) => (
+            <MovieItem key={movie.id} movie={movie} />
           ))
+        
         )}
       </div>
     </div>

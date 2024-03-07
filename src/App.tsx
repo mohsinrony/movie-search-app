@@ -1,6 +1,6 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, /* useState */ } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
 //import moviesList from './dummy_data/aqua_movies.json';
 
 import Header from './components/Header';
@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import MovieList from './components/MovieList';
 import SingleMovie from './pages/SinglePage';
 import MovieList2 from './components/MovieList2';
+import SearchResults from './components/SearchResults';
 
 
 interface LayoutProps {
@@ -35,7 +36,7 @@ const NotFound: React.FC = () => {
   return (
     <div>
       <main>
-        <div>
+        <div className='notFound'>
           <h1>Looks like you've found the doorway to the great nothing</h1>
           <p>Sorry about that! Please visit our homepage to get where you need to go.</p>
           <Link to="/" type="button">Take me there!</Link>
@@ -59,25 +60,6 @@ interface MovieListProps {
 }
 
 const App: React.FC<MovieListProps> = () => {
-  const [data, setData] = useState<any>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://unelmamovie.com/api/v1/titles?page=1&perPage=18&type=movie&language=en&onlyStreamable=true&includeAdult=true');
-        const dataArray = response.data.pagination.data;
-        setData(dataArray);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (!data) {
-    return <div>Movies Loading...</div>;
-  }
 
 
 
@@ -85,9 +67,10 @@ const App: React.FC<MovieListProps> = () => {
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<MovieList movies={data}/>} />
-          <Route path="/movies" element={<MovieList2 movies={data}/>} />
-          <Route path="/movies/:id" element={<SingleMovie movieData={data} relatedMovies={data}/>} />
+          <Route path="/" element={<MovieList/>} />
+          <Route path="/movies/:pageNumber" element={<MovieList2/>} />
+          <Route path="/movie/:id" element={<SingleMovie/>} />
+          <Route path="/search" element={<SearchResults/>} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Layout>
