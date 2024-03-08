@@ -117,6 +117,12 @@ main {
   color: #333;
 }
 
+.topBar h1 {
+  margin: 0;
+  font-size: 3rem;
+  color: #333;
+}
+
 .moviePoster{
   aspect-ratio: 2/3;
   object-fit:cover;
