@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Movie } from '../types';
 import MovieItem from '../components/MovieItem';
 //import PageNavigation from '../components/PageNavigation';
-import PaginationSearch from './PaginationSearch';
+import PaginationSearch from '../components/PaginationSearch';
 
 const SearchResults: React.FC = () => {
   const [searchResults, setSearchResults] = useState<Movie[]>([]);
@@ -74,12 +74,15 @@ const SearchResults: React.FC = () => {
         {/* Sorting and filtering controls */}
         {/* You can add sorting and filtering controls here */}
         {/* View mode toggle */}
+        {totalResults > 0 ? (
         <span className={'material-symbols-outlined viewBtn'} onClick={toggleViewMode}>
           {`${viewMode === 'grid' ? 'lists' : 'grid_view'}`}
         </span>
+        ) : ''}
+        
       </div>
 
-      <PaginationSearch apiUrl={apiURL} searchQuery={searchQuery} />
+      {totalResults > 0 ? (<PaginationSearch apiUrl={apiURL} searchQuery={searchQuery} />) : ''}
       
       {/* Browse Movies */}
       <div className={`${viewMode === 'grid' ? 'movie-list' : 'list'}`}>
@@ -88,7 +91,8 @@ const SearchResults: React.FC = () => {
         ))}
       </div>
 
-      <PaginationSearch apiUrl={apiURL} searchQuery={searchQuery} />
+      {totalResults > 0 ? (<PaginationSearch apiUrl={apiURL} searchQuery={searchQuery} />) : ''}
+      
       
     </div>
   );

@@ -7,8 +7,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import MovieList from './components/MovieList';
 import SingleMovie from './pages/SinglePage';
-import MovieList2 from './components/MovieList2';
-import SearchResults from './components/SearchResults';
+import MovieList2 from './pages/MoviesPage';
+import SearchResults from './pages/SearchResults';
 
 
 interface LayoutProps {
@@ -34,15 +34,14 @@ const NotFound: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <main>
+      <div className="container">
         <div className='notFound'>
           <h1>Looks like you've found the doorway to the great nothing</h1>
           <p>Sorry about that! Please visit our homepage to get where you need to go.</p>
           <Link to="/" type="button">Take me there!</Link>
         </div>
-      </main>
-    </div>
+      </div>
+    
   );
 }
 

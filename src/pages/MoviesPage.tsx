@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import MovieItem from './MovieItem';
-import PageNavigation from './PageNavigation';
-import TopBar from './TopBar';
+import MovieItem from '../components/MovieItem';
+import PageNavigation from '../components/PageNavigation';
+import TopBar from '../components/TopBar';
 
 const Movies: React.FC = () => {
   const navigate = useNavigate();

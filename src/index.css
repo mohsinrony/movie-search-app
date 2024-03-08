@@ -50,7 +50,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: calc(100vh - (var(--headerHeight) + var(--footerHeight)) - 7rem);
+  /* height: calc(100vh - (var(--headerHeight) + var(--footerHeight)) - 7rem); */
   color: #333;
 }
 
@@ -98,6 +98,7 @@ main {
   justify-content: center;
   width: 100%;
   padding: 1rem;
+  min-height: calc(100vh - (var(--headerHeight) + var(--footerHeight)) - 5rem);
 }
 
 .container {
