@@ -93,18 +93,18 @@ const TopBar: React.FC<Props> = ({
         <div className="filter">
             <select className='sortMovies' id="sort_by" onChange={(e) => setSortValue(e.target.value)}>
               <option>Select</option>
-              <option value="popularity.asc">Popularity Lo - Hi</option>
-              <option value="popularity.desc">Popularity Hi - Lo (Default)</option>
-              <option value="revenue.asc">Revenue Lo - Hi</option>
-              <option value="revenue.desc">Revenue Hi - Lo</option>
-              <option value="primary_release_date.asc">Release date Lo - Hi</option>
-              <option value="title.asc">Title A - Z</option>
-              <option value="title.desc">Title Z - A</option>
-              <option value="primary_release_date.desc">Release date Hi - Lo</option>
-              <option value="vote_average.asc">Avg. Ratings Lo - Hi</option>
-              <option value="vote_average.desc">Avg. Ratings Hi - Lo</option>
-              <option value="vote_count.asc">Vote Count Lo - Hi</option>
-              <option value="vote_count.desc">Vote Count Hi - Lo</option>
+              <option value="popularity.desc">Most Popular First (Default)</option>
+              <option value="popularity.asc">Least Popular First</option>
+              <option value="revenue.desc">Highest Revenue First</option>
+              <option value="revenue.asc">Lowest Revenue First</option>
+              <option value="primary_release_date.desc">Recent Movies First</option>
+              <option value="primary_release_date.asc">Old Movies First</option>
+              <option value="title.asc">Name A - Z</option>
+              <option value="title.desc">Name Z - A</option>
+              <option value="vote_average.desc">Highest Ratings First</option>
+              <option value="vote_average.asc">Lowest Ratings First</option>
+              <option value="vote_count.asc">Most Voted First</option>
+              <option value="vote_count.desc">Least Voted First</option>
             </select>
           </div>
         </div>
