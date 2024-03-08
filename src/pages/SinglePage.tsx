@@ -1,62 +1,114 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Movie } from '../types';
+import { useParams, Link } from 'react-router-dom';
+import { Image, Movie } from '../types';
 import '../styles/SinglePage.css';
-import { Link } from 'react-router-dom';
-
-// Define the props for the SingleMovie component
-interface Props {
-  movieData: Movie[]; // Declare movieData as an array of Movie objects
-  relatedMovies: Movie[]; // Declare relatedMovies as an array of Movie objects
-}
+import axios from 'axios'; // Import axios for HTTP requests
+//import VideoCarousel from '../components/VideoCarousel';
 
 
-const SingleMovie: React.FC<Props> = ({movieData, relatedMovies}) => {
+
+const SingleMovie: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<Movie | null>(null);
-
-  useEffect(() => {
-   
-    const selectedMovie = movieData.find(movie => movie.id.toString() === id);
-    if (selectedMovie) {
-      const { id, name, poster, rating, year } = selectedMovie;
- 
-  setMovie({ id, name, poster: poster || 'default-poster.jpg', rating, year });
+  const [movieImages, setMovieImages] = useState<any>(null);
+  //const [movieVideos, setMovieVideos] = useState<any>(null);
+  const [relatedMovies, setRelatedMovies] = useState<Movie[]>([]);
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZTkzNzBjM2JlZTIzMjZkNzJlZjBhNGVmMTVhZDgyMCIsInN1YiI6IjY1ZGNlNTAxMzk1NDlhMDE4NzRlODBkMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fR4QEHaqcwD8TTvWCVQSrO241D6m2HBFL1rCW2prTSo'
     }
-  }, [id]);
+  };
+  useEffect(() => {
+    const fetchMovieData = async () => {
+      
+      try {
+        // Fetch movie details
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, options);
+        const movieDetails = response.data; // The response contains single movie details
+        setMovie(movieDetails);
+
+        // Fetch movie images
+        const movieImagesRef = await axios.get(`https://api.themoviedb.org/3/movie/${id}/images`, options);
+        setMovieImages(movieImagesRef.data.backdrops);
+        //console.log(movieImagesRef.data.backdrops);
+
+        // Fetch movie videos
+        // const movieVideosRef = await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos`, options);
+        // setMovieVideos(movieVideosRef.data.results);
+        //console.log(movieVideosRef.data.results);
+
+        // Fetch related movies
+        const relatedMoviesRef = await axios.get(`https://api.themoviedb.org/3/movie/${id}/similar`, options);
+        const relatedMoviesData = relatedMoviesRef.data.results; // The response contains an array of similar movies
+        setRelatedMovies(relatedMoviesData);
+        
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchMovieData();
+  }, [id]); // Fetch data whenever ID changes
+
 
   if (!movie) {
     return <div>Loading...</div>;
   }
 
+  const baseImgUrl = 'https://image.tmdb.org/t/p/original';
+  //const vidURL = movieVideos && movieVideos.length > 0 ? `https://www.youtube.com/embed/${movieVideos[0].key}` : '';
+  //console.log(vidURL);
+
+  //const imgsURL = movieImages && movieImages.length > 0 ? `https://image.tmdb.org/t/p/original/${movieImages[0].file_path}` : '';
+  //console.log(imgsURL);
+
+
   return (
-    <div className='single-page-container'>
-      <img src={movie.poster} alt={movie.name} className='movie-poster' />
-      <h1 className='movie-title'>{movie.name}</h1>
-      <p className='movie-info'>{movie.year}</p>
-      <p className='movie-info'>{movie.rating}</p>
+    <div className='container'>
+      <div className="singleContainer">
+      {movie.poster_path && (
+          <img src={baseImgUrl + movie.poster_path} alt={movie.title} />
+      )}
+
+        <div className="movieDetails">
+          <h1 className='movieTitle'>{movie.title}</h1>
+          <p className='movie-info'>Released: {movie.release_date ? movie.release_date.split('-')[0] : 'Release date not available'}</p>
+          <div className='movie-info'>Rating: 
+          <div className="progress-bar">
+              <div className="progress" style={{ width: `${movie.vote_average * 10}%` }}>
+                  &#9733; {movie.vote_average.toFixed(1)}/10
+              </div>
+          </div>
+          </div>
+          <p className='movie-info'>{movie.vote_average.toFixed(1)}/10 ({movie.vote_count} Votes)</p>
+          <p className='movie-info'>Genre: {movie.genres && movie.genres.map((genre) => genre.name).join(', ')}</p>
+          <p className='movie-info'>Runtime: {movie.runtime} minutes</p>
+          <p className='movie-info'>Language: {movie.original_language}</p>
+          <p className='movie-info'>Description: {movie.overview}</p>
+        </div>
+      </div>
+
+      <br />
       <hr />
-      {/* RELATED MOVIES 
-      https://unelmamovie.com/api/v1/titles/{id}/related */}
-      {relatedMovies.length && (
+
+      {relatedMovies.length > 0? (
         <div className='singlePageRelated'>
           <h2>Similar Movies</h2>
-          <div style={{ display: "flex", gridGap:"1rem", flexDirection: "row" }}>
+          <div className='relatedMovies'>
           {relatedMovies.map((movie) => (
-            <Link to={`/movies/${movie.id}`} key={movie.id}>
-              <img className='movie-poster' src={movie.poster} alt={movie.name} style={{width:"200px"}}/>
-              <h6 className='movie-title'>{movie.name}</h6>
-              <p className='movie-info'>{movie.year}</p>
-              <p className='movie-info'>{movie.rating}</p>
+            <Link to={`/movie/${movie.id}`} key={movie.id}>
+              <img className='movie-poster' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}?`} alt={movie.title} style={{width:"200px"}}/>
+              <h6 className='movie-title'>{movie.title}</h6>
             </Link>
           ))}
           </div>
         </div>
-      )}
+      ) : ''}
     
     </div>
   );
 };
 
 export default SingleMovie;
-

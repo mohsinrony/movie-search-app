@@ -1,17 +1,37 @@
 import React, { useState } from 'react';
 import imageUrl from "../assets/logo.png";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
 const Header: React.FC = () => {
 
-  const [search, setSearch] = useState("");
-  //const [movies, setMovies] = useState([]);
+  //const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [pageNum, setPageNum] = useState(1);
+
+  // Function to handle search input change
+  // const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearchQuery(e.target.value);
+  // };
 
   // Function to handle search input change
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+    setSearchQuery(e.target.value);
+  };
+
+  // const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   // Redirect to the search results page with the search query as a parameter
+  //   navigate(`/search/${searchQuery}`);
+  // };
+
+  // Function to handle search form submission
+  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // Redirect to the search results page with the search query as a query parameter
+    navigate(`/search?page=${pageNum}&query=${searchQuery}`);
   };
 
   return (
@@ -24,24 +44,32 @@ const Header: React.FC = () => {
 
               
 
-      <input
-            type="text"
-            className='searchBar'
-            placeholder="Search movies..."
-            value={search}
-            onChange={handleSearchChange}
-      />
+      <form onSubmit={handleSearchSubmit}>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Search movies..."
+          className='searchBar'
+        />
+        {/* <button type="submit">
+          <span className="material-symbols-outlined">
+          video_search
+          </span>
+        </button> */}
+      </form>
 
       <nav className='mainNav'>
         <ul>
           <li>
-            <Link to={"/"}>Home</Link>
+            <a href={"/"}>Home</a>
           </li>
           <li>
-            <Link to={"/movies"}>Movies</Link>
+            <a href='/movies/1'>Movies</a>
           </li>
+
           <li>
-            <Link to={"/about"}>About</Link>
+            <a href={"/about"}>About</a>
           </li>
         </ul>
       </nav>
