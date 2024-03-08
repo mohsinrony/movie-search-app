@@ -6,9 +6,10 @@ import axios from 'axios';
 
 interface Props {
     apiUrl: string;
+    searchQuery: string;
 };
 
-const PaginationSearch: React.FC<Props> = ({ apiUrl }) => {
+const PaginationSearch: React.FC<Props> = ({ apiUrl, searchQuery }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const page = searchParams.get('pageNumber');
     const query = searchParams.get('query');
@@ -48,11 +49,11 @@ const PaginationSearch: React.FC<Props> = ({ apiUrl }) => {
         <div>
             <div className="page-navigation">
                 {currentPage > 1 ? (
-                    <Link to={`/movies/${currentPage - 1}`}>
+                    <Link to={`/search?page=${currentPage - 1}&query=${searchQuery}`}>
                         <button>Previous</button>
                     </Link>
                 ) : (
-                    <Link to={`/movies/${currentPage}`} className='disabled'>
+                    <Link to={`/search?page=${currentPage}&query=${searchQuery}`} className='disabled'>
                         <button disabled className='disabled'>Previous</button>
                     </Link>
                 )}
@@ -60,11 +61,11 @@ const PaginationSearch: React.FC<Props> = ({ apiUrl }) => {
                 {/* | Showing {currentPage * 20 - 19} to {totalResults > 20 ? (currentPage * 20) :} of total {totalResults} movies */}</h3>
                 
                 {currentPage < totalPages ? (
-                    <Link to={`/movies/${currentPage + 1}`}>
+                    <Link to={`/search?page=${currentPage + 1}&query=${searchQuery}`}>
                         <button>Next</button>
                     </Link>
                 ) : (
-                    <Link to={`/movies/${currentPage}`} className='disabled'>
+                    <Link to={`/search?page=${currentPage}&query=${searchQuery}`} className='disabled'>
                         <button disabled className='disabled'>Next</button>
                     </Link>
                 )}

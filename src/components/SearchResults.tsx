@@ -8,6 +8,7 @@ import PaginationSearch from './PaginationSearch';
 
 const SearchResults: React.FC = () => {
   const [searchResults, setSearchResults] = useState<Movie[]>([]);
+  const [totalResults, setTotalResults] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,6 +28,7 @@ const SearchResults: React.FC = () => {
       };
       const response = await axios.get(`https://api.themoviedb.org/3/search/movie?page=${page}&query=${query}`, options);
       setSearchResults(response.data.results);
+      setTotalResults(response.data.total_results);
       setLoading(false);
     } catch (error) {
       setError('Error fetching data');
@@ -68,7 +70,7 @@ const SearchResults: React.FC = () => {
   return (
     <div className='container'>
       <div className="topBar">
-        <h1>{searchResults.length} {(searchResults.length === 1)? <>result</>:<>results</>} found for "{searchQuery}"</h1>
+        <h1>{totalResults} {(totalResults === 1)? <>result</>:<>results</>} found for "{searchQuery}"</h1>
         {/* Sorting and filtering controls */}
         {/* You can add sorting and filtering controls here */}
         {/* View mode toggle */}
@@ -76,13 +78,17 @@ const SearchResults: React.FC = () => {
           {`${viewMode === 'grid' ? 'lists' : 'grid_view'}`}
         </span>
       </div>
-      <PaginationSearch apiUrl={apiURL} />
+
+      <PaginationSearch apiUrl={apiURL} searchQuery={searchQuery} />
+      
       {/* Browse Movies */}
       <div className={`${viewMode === 'grid' ? 'movie-list' : 'list'}`}>
         {searchResults.map((movie: Movie) => (
           <MovieItem key={movie.id} movie={movie} viewMode={viewMode} />
         ))}
       </div>
+
+      <PaginationSearch apiUrl={apiURL} searchQuery={searchQuery} />
       
     </div>
   );
