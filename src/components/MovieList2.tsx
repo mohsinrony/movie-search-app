@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import MovieItem from '../components/MovieItem';
-import PageNavigation from '../components/PageNavigation';
+import MovieItem from './MovieItem';
+import PageNavigation from './PageNavigation';
 import TopBar from './TopBar';
 
 const Movies: React.FC = () => {

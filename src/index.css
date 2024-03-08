@@ -501,7 +501,7 @@ iframe {
 
 .movieDetails .progress-bar, .movie-details .progress-bar {
   width: 280px;
-  margin-left: 0.5rem;
+  max-width: 100%;
 }
 
 .progress {
