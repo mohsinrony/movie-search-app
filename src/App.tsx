@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import MovieList from './components/MovieList';
+import MovieList from './components/Home';
 import SingleMovie from './pages/SinglePage';
 import MovieList2 from './pages/MoviesPage';
 import SearchResults from './pages/SearchResults';

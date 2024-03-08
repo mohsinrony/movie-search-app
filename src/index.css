@@ -505,6 +505,7 @@ iframe {
   max-width: 100%;
 }
 
+/* Styles for progress bar */
 .progress {
   height: 100%;
   background-color: #535bf2; /* Color of the filled portion */
@@ -521,4 +522,98 @@ iframe {
   line-height: 20px; /* Center the text vertically */
   transition: width 0.9s ease; /* Smooth transition for width changes */
 }
+/* Styles for progress bar ends */
 
+/* Styles for carousel */
+.carousel {
+  width: 70%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-item {
+  width: 16%; /* Adjust width to fit your layout */
+  flex: 0 0 auto; /* Adjust margin to fit your layout */
+  /*padding: 0 0.25px; /* Add padding if needed */
+  margin: 0 0.25px; /* Add margin if needed */
+}
+
+.carousel-item img {
+  width: 200px; /* Adjust width as needed */
+  height: auto;
+}
+
+.carousel-item h3 {
+  margin: 0;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #535bf2;
+}
+/* Carousel ends */
+
+/* Styles for Hero Banner */
+
+.hero-banner {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  height: 70vh;
+  margin: -2rem 0 2rem -20px;
+}
+
+.hero-carousel {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.hero-carousel-item {
+  flex: 0 0 100%;
+  width: 100%; 
+  position: relative;
+}
+
+.hero-carousel-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  object-fit: cover;
+}
+
+.hero-carousel-item h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 3rem;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-prev,
+.hero-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.hero-prev {
+  left: 10px;
+}
+
+.hero-next {
+  right: 20px;
+}
+/* Hero Banner ends */
