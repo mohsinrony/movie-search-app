@@ -38,7 +38,7 @@ const PaginationSearch: React.FC<Props> = ({ apiUrl, searchQuery }) => {
     }, [page, query, apiUrl]);
 
     if (!paginationData) {
-        return <div className='page-navigation'>Loading pagination data...</div>;
+        return <div className='page-navigation'>{/* Loading pagination data... */}</div>;
     }
 
     const currentPage = paginationData.page;
