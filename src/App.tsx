@@ -9,6 +9,7 @@ import MovieList from './components/Home';
 import SingleMovie from './pages/SinglePage';
 import MovieList2 from './pages/MoviesPage';
 import SearchResults from './pages/SearchResults';
+import About from './components/About';
 
 
 interface LayoutProps {
@@ -69,6 +70,7 @@ const App: React.FC<MovieListProps> = () => {
           <Route path="/" element={<MovieList/>} />
           <Route path="/movies/:pageNumber" element={<MovieList2/>} />
           <Route path="/movie/:id" element={<SingleMovie/>} />
+          <Route path="/about" element={<About title="About Movie Search App" />} />
           <Route path="/search" element={<SearchResults/>} />
           <Route path='*' element={<NotFound />} />
         </Routes>
