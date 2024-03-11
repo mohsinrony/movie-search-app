@@ -8,6 +8,8 @@ import {
 import imageUrl from "../assets/logo.png";
 import { Link } from "react-router-dom";
 
+const currentYear = new Date().getFullYear();
+
 
 const Footer: React.FC = () => {
   return (
@@ -16,6 +18,10 @@ const Footer: React.FC = () => {
         <Link to={"/"}>
           <img src={imageUrl} height="60px" alt="T3MDB" />
         </Link>
+
+        <div className="copyRight">
+          <p>&copy; {currentYear} <a href="/">T3MDB</a></p>
+        </div>
 
         <div>
         <a href="https://twitter.com">

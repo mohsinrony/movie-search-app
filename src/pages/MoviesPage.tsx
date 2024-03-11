@@ -4,8 +4,12 @@ import axios from 'axios';
 import MovieItem from '../components/MovieItem';
 import PageNavigation from '../components/PageNavigation';
 import TopBar from '../components/TopBar';
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { Link } from 'react-router-dom';
+import { auth } from '../firebase';
 
 const Movies: React.FC = () => {
+  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
   const { pageNumber }  = useParams();
   const pageNumberValue = Number(pageNumber) || 1;
@@ -30,9 +34,21 @@ const Movies: React.FC = () => {
     navigate(`/movies/${pageNumber}`);
   }, [pageNumber]);
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, [user]);
 
 
   useEffect(() => {
+    // If the user is not signed in, you can render alternative content or redirect
+    if (!user) {
+      <p id='plsSignIn'>Please<Link to={'/auth'}>&nbsp; sign in &#160;</Link> to view this content.</p>;
+      return;
+    }
+
     const fetchData = async () => {
         try {
             let url = `https://api.themoviedb.org/3/discover/movie?page=${pageNum}`;
@@ -83,19 +99,13 @@ const Movies: React.FC = () => {
     //console.log('url data: ' + url);
 
     fetchData();
-}, [url, pageNum, selectedLang, selectedGenreId, publishYear, sortValue]);
+}, [user, url, pageNum, selectedLang, selectedGenreId, publishYear, sortValue]);
 
 const toggleViewMode = () => {
   setViewMode(prevMode => (prevMode === 'grid' ? 'list' : 'grid'));
 }
 
-  
-
-  if (!movies) {
-    return <div className='container'>Movies Loading...</div>;
-  }
-
-  
+ 
 
   // Define the handleGenreSelection function to manage selected genres
   const handleGenreSelection = (genre: { id: string | number; name: string }, checked: boolean) => {
@@ -115,6 +125,26 @@ const toggleViewMode = () => {
   };
 
   const currentYear = new Date().getFullYear();
+
+
+
+  // If the user is not signed in, render the sign-in message
+  if (!user) {
+    return (
+      <div className="container">
+        <p id="plsSignIn">
+          Please<Link to={'/auth'}>&nbsp; sign in &#160;</Link> to view this content.
+        </p>
+      </div>
+    );
+  }
+
+  if (!movies) {
+    return <div className='container'>Movies Loading...</div>;
+  }
+  
+
+
 
 
   return (

@@ -4,8 +4,8 @@ import React, {useEffect} from 'react';
 import axios from 'axios';
 import '../styles/MovieList.css';
 //import { Movie } from '../types';
-import Carousel from './Carousel';
-import HeroBanner from './HeroBanner';
+import Carousel from '../components/Carousel';
+import HeroBanner from '../components/HeroBanner';
 
 const Home: React.FC = () => {
   //const [movies, setMovies] = React.useState<any[]>([]);
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
     const fetchData = async () => {
         try {
             const url = `https://api.themoviedb.org/3`;
-            const nowPlayingCarouseUrl = `${url}/movie/now_playing?language=en-US&page=1`;
+            const nowPlayingCarouseUrl = `${url}/movie/now_playing?language=en-US&page=2`;
             const trendingCarouselUrl = `${url}/trending/movie/week`;
             const popularCarouselUrl = `${url}/movie/popular?language=en-US&page=1`;
             const upcomingCarouselUrl = `${url}/movie/upcoming?language=en-US&page=1`;
@@ -78,7 +78,7 @@ const Home: React.FC = () => {
 
   return (
     <div className='container'>
-      <HeroBanner /* title="Now Playing" */ sourceData={nowPlayingCarousel} />
+      <HeroBanner sourceData={nowPlayingCarousel} />
       <Carousel title="Trending" sourceData={trendingCarousel} />
       <Carousel title="Popular" sourceData={popularCarousel} />
       <Carousel title="Upcoming" sourceData={upcomingCarousel} />

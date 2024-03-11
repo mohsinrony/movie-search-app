@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Image, Movie } from '../types';
+import { /* Image, */ Movie } from '../types';
 import '../styles/SinglePage.css';
-import axios from 'axios'; // Import axios for HTTP requests
-//import VideoCarousel from '../components/VideoCarousel';
+import axios from 'axios';
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase';
+
 
 
 
 const SingleMovie: React.FC = () => {
+  const [user, setUser] = useState<User | null>(null);
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<Movie | null>(null);
   const [movieImages, setMovieImages] = useState<any>(null);
   //const [movieVideos, setMovieVideos] = useState<any>(null);
   const [relatedMovies, setRelatedMovies] = useState<Movie[]>([]);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
   const options = {
     method: 'GET',
     headers: {
@@ -21,6 +31,12 @@ const SingleMovie: React.FC = () => {
     }
   };
   useEffect(() => {
+      // If the user is not signed in, you can render alternative content or redirect
+      if (!user) {
+        <p id='plsSignIn'>Please<Link to={'/auth'}>&nbsp; sign in &#160;</Link> to view this content.</p>;
+        return;
+      }
+
     const fetchMovieData = async () => {
       
       try {
@@ -50,8 +66,12 @@ const SingleMovie: React.FC = () => {
     };
 
     fetchMovieData();
-  }, [id]); // Fetch data whenever ID changes
+  }, [id, user]);
 
+  // If the user is not signed in, you can render alternative content or redirect
+  if (!user) {
+    return  <p id='plsSignIn'>Please<Link to={'/auth'}>&nbsp; sign in &#160;</Link> to view this content.</p>;
+  }
 
   if (!movie) {
     return <div>Loading...</div>;

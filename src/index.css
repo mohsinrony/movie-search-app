@@ -347,13 +347,29 @@ nav ul {
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  list-style: none;
+  list-style: none;;
 }
 
 nav ul li a {
   color: #333;
   text-decoration: none;
   font-size: 1.5rem;
+}
+
+/* Styles for Login Menu Item */
+.authLink {
+  align-items: center;
+  color: #535bf2;
+  /* border: 2px solid #535bf2; */
+  padding: 0 0.25rem;
+  padding-bottom: 0.35rem;
+  vertical-align: middle;
+  border-radius: 0.35rem;
+}
+
+.authLink:hover {
+  background-color: #535bf2;
+  color: #f9f9f9;
 }
 
 /* Styles for footer */
@@ -364,7 +380,7 @@ footer {
   align-items: center;
   padding: 1rem;
   background-color: #ccc;
-  color: #fff;
+  color: #f9f9f9;
   height: fit-content;
   margin-top: 1rem;
 }
@@ -374,6 +390,16 @@ footer a {
   text-decoration: none;
   font-size: 1.5rem;
   padding: 0.5rem;
+}
+
+.copyRight {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.copyRight a {
+  color: #f9f9f9;
+  text-decoration: none;
 }
 
 /* Styles for page-navigation */
@@ -617,3 +643,202 @@ iframe {
   right: 20px;
 }
 /* Hero Banner ends */
+
+/* Auth Page start */
+#authPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+}
+
+#authForm {
+  padding: 1rem;
+  width: fit-content;
+}
+
+#authForm h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bolder;
+  -webkit-text-stroke: 2px;
+  letter-spacing: 4px;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: #535bf2;
+  background-color: #ccc;
+}
+
+#authForm form {
+  border: 0px solid #000;
+  border-radius: 0.5rem;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ddd;
+}
+
+#authForm label {
+  color: #535bf2;
+  font-weight: bold;
+  padding-right: 1rem;
+}
+
+#authForm input {
+  accent-color: #bbb;
+  color: #535bf2;
+  background-color: #ccc;
+  border: 1px solid darkslateblue;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+}
+
+#authForm button[type='submit'] {
+  place-items: center;
+  background-color: #ccc;
+  padding: 0.5rem 0.125rem;
+  border-radius: 0.25rem;
+  border: 1px solid #333;
+  margin-top: 0.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+#authForm button[type='submit']:hover {
+  background-color: #535bf2;
+  color: #f9f9f9;
+  border-color: #f9f9f9;
+}
+
+#authForm > button[type='button'] {
+  color: darkslateblue;
+  border: 1px solid none;
+}
+
+#authForm > button[type='button']:hover {
+  border: 1px solid none;
+}
+
+#authForm #authP {
+  cursor: pointer;
+  color: darkgreen;
+  font-weight: bolder;
+  margin-top: 1rem;
+}
+/* Auth Page end */
+
+/* Styles for Dashboard page start */
+
+#dashPage {
+  display: flex;
+  justify-content: center;
+}
+
+#dash {
+  margin: 1rem auto;
+  padding: 1rem;
+  width: fit-content;
+  min-width: 20vw;
+}
+
+#dash form {
+  border: 0px solid #000;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  padding-right: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ddd;
+}
+
+#dash form button {
+  width: calc(100% + 1rem);
+}
+
+#dash form button:hover {
+  background-color: #535bf2;
+  color: #f9f9f9;
+  border-color: #f9f9f9;
+}
+
+#dash h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bolder;
+  -webkit-text-stroke: 2px;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #444;
+}
+
+#dash h3 {
+  text-align: center;
+  font-size: 1.75rem;
+  -webkit-text-stroke: 2px;
+  color: #535bf2;
+  letter-spacing: 2px;
+  margin: 2rem auto;
+}
+
+#dash h4 {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bolder;
+  -webkit-text-stroke: 1px;
+  letter-spacing: 1px;
+  margin: 0.5rem auto;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #444;
+}
+
+#dash label {
+  color: #535bf2;
+  font-weight: bold;
+}
+
+#dash input {
+  accent-color: #bbb;
+  color: #535bf2;
+  background-color: #ccc;
+  border: 1px solid #535bf2;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+}
+
+/* Styles for dashboard ends */
+
+/* Styles for restricted page starts */
+#plsSignIn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: bolder;
+  width: 100%;
+  height: 100%;
+  color: #535bf2;
+}
+
+#plsSignIn a {
+  text-decoration: none;
+  font-size: 3rem;
+  color: #535bf2;
+}
+/* Styles for restricted page ends */
