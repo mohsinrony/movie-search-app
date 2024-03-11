@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import imageUrl from "../assets/logo.png";
 import { Link, useNavigate } from 'react-router-dom';
+import { signOut, User } from 'firebase/auth';
+import { auth } from '../firebase';
 
 
 
@@ -10,6 +12,16 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [pageNum, setPageNum] = useState(1);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
+  
 
   // Function to handle search input change
   // const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,11 +33,7 @@ const Header: React.FC = () => {
     setSearchQuery(e.target.value);
   };
 
-  // const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   // Redirect to the search results page with the search query as a parameter
-  //   navigate(`/search/${searchQuery}`);
-  // };
+
 
   // Function to handle search form submission
   const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -33,6 +41,21 @@ const Header: React.FC = () => {
     // Redirect to the search results page with the search query as a query parameter
     navigate(`/search?page=${pageNum}&query=${searchQuery}`);
   };
+
+
+  //Sign-out function is called with onClick={handleLogout} inside a HTML element
+  const handleLogout = async () => {
+    
+    if (user) {
+        try {
+        await signOut(auth);
+        //console.log('User logged out');
+        navigate('/');
+        } catch (error : any) {
+        console.error('Logout error:', error.message);
+        }
+    }
+    };
 
   return (
     <header>
@@ -67,6 +90,21 @@ const Header: React.FC = () => {
           <li>
             <a href='/movies/1'>Movies</a>
           </li>
+
+          {user?<>
+          <li>
+            <a className='authLink' href={"/dashboard"}>myProfile</a>
+          </li>
+          <li>
+          <a className='authLink' href={"/auth"} onClick={handleLogout}>Logout</a>
+          </li>
+          </>:
+          <li>
+            <a className='authLink' href={"/auth"}>Login</a>
+          </li>
+          
+         }
+
 
           <li>
             <a href={"/about"}>About</a>

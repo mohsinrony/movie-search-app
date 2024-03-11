@@ -1,15 +1,15 @@
 import React, { ReactNode, useEffect, /* useState */ } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-//import axios from 'axios';
-//import moviesList from './dummy_data/aqua_movies.json';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import MovieList from './components/Home';
+import MovieList from './pages/Home.tsx';
 import SingleMovie from './pages/SinglePage';
 import MovieList2 from './pages/MoviesPage';
 import SearchResults from './pages/SearchResults';
-import About from './components/About';
+import About from './pages/About.tsx';
+import Auth from './pages/Auth.tsx';
+import Dashboard from './pages/Dashboard';
 
 
 interface LayoutProps {
@@ -70,6 +70,8 @@ const App: React.FC<MovieListProps> = () => {
           <Route path="/" element={<MovieList/>} />
           <Route path="/movies/:pageNumber" element={<MovieList2/>} />
           <Route path="/movie/:id" element={<SingleMovie/>} />
+          <Route path="/auth" element={<Auth/>} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/about" element={<About title="About Movie Search App" />} />
           <Route path="/search" element={<SearchResults/>} />
           <Route path='*' element={<NotFound />} />
