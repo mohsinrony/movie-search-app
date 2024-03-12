@@ -14,14 +14,15 @@ const currentYear = new Date().getFullYear();
 const Footer: React.FC = () => {
   return (
     <footer>
-      
-        <Link to={"/"}>
-          <img src={imageUrl} height="60px" alt="T3MDB" />
-        </Link>
 
         <div className="copyRight">
           <p>&copy; {currentYear} <a href="/">T3MDB</a></p>
         </div>
+
+        <Link to={"/"}>
+          {/* <img src={imageUrl} height="60px" alt="T3MDB" /> */}
+          <h1>T3 Movies</h1>
+        </Link>
 
         <div>
         <a href="https://twitter.com">
