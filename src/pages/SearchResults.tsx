@@ -75,9 +75,12 @@ const SearchResults: React.FC = () => {
         {/* You can add sorting and filtering controls here */}
         {/* View mode toggle */}
         {totalResults > 0 ? (
-        <span className={'material-symbols-outlined viewBtn'} onClick={toggleViewMode}>
+        <div className='topBar-btn' onClick={toggleViewMode}>
+        <span className={'material-symbols-outlined'}>
           {`${viewMode === 'grid' ? 'lists' : 'grid_view'}`}
         </span>
+        <span>View</span>
+      </div>
         ) : ''}
         
       </div>

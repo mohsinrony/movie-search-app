@@ -7,7 +7,7 @@ interface Props {
     title: string;
   }
   
-  const Carousel: React.FC<Props> = ({ title, sourceData }) => {
+  const Gallery: React.FC<Props> = ({ title, sourceData }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
   
     useEffect(() => {
@@ -22,11 +22,11 @@ interface Props {
     const baseimageurl = "https://image.tmdb.org/t/p/original";
   
     return (
-      <div className="carousel">
-        <h2 className='carouselTitle'>{title}</h2>
-        <div className="carousel-inner" style={{ transform: `translateX(-${currentIndex * 20}%)` }}>
+      <div className="gallery">
+        <h2 className='galleryTitle'>{title}</h2>
+        <div className="gallery-inner" style={{ transform: `translateX(-${currentIndex * 20}%)` }}>
           {sourceData.map((movie, index) => (
-            <div className="carousel-item" key={index}>
+            <div className="gallery-item" key={index}>
                 <Link to={`/movie/${movie.id}`}>
                     <img src={baseimageurl+movie.poster_path} alt={movie.title} />
                     <h3>{movie.title}</h3>
@@ -38,4 +38,4 @@ interface Props {
     );
   };
   
-  export default Carousel;
+  export default Gallery;

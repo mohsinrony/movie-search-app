@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+
 //const RESULTS_PER_PAGE = 20;
 
 interface Props {
@@ -45,32 +48,36 @@ const PageNavigation: React.FC<Props> = ({ apiUrl }) => {
 
     return (
         <div>
-            <div className="page-navigation">
-                {currentPage > 1 ? (
-                    <Link to={`/movies/${currentPage - 1}`}>
-                        <button>Previous</button>
-                    </Link>
-                ) : (
-                    <Link to={`/movies/${currentPage}`} className='disabled'>
-                        <button disabled className='disabled'>Previous</button>
-                    </Link>
-                )}
-                <h3>Page {currentPage} of {totalPages} 
-                {/* | Showing {currentPage * 20 - 19} to {totalResults > 20 ? (currentPage * 20) :} of total {totalResults} movies */}</h3>
-                
-                {currentPage < totalPages ? (
-                    <Link to={`/movies/${currentPage + 1}`}>
-                        <button>Next</button>
-                    </Link>
-                ) : (
-                    <Link to={`/movies/${currentPage}`} className='disabled'>
-                        <button disabled className='disabled'>Next</button>
-                    </Link>
-                )}
-                
-            </div>
+        <div className="page-navigation">
+            {currentPage > 1 ? (
+                <Link to={`/movies/${currentPage - 1}`}>
+                    {/* <button>Previous</button> */}
+                    <ArrowBackIosNewOutlinedIcon />
+                </Link>
+            ) : (
+                <Link to={`/movies/${currentPage}`} className='disabled'>
+                    {/* <button disabled className='disabled'>Previous</button> */}
+                    <ArrowBackIosNewOutlinedIcon className='disabled' />
+                </Link>
+            )}
+            <h3>Page {currentPage} of {totalPages} 
+            {/* | Showing {currentPage * 20 - 19} to {totalResults > 20 ? (currentPage * 20) :} of total {totalResults} movies */}</h3>
+            
+            {currentPage < totalPages ? (
+                <Link to={`/movies/${currentPage + 1}`}>
+                    {/* <button>Next</button> */}
+                    <ArrowForwardIosOutlinedIcon />
+                </Link>
+            ) : (
+                <Link to={`/movies/${currentPage}`} className='disabled'>
+                    {/* <button disabled className='disabled'>Next</button> */}
+                    <ArrowForwardIosOutlinedIcon className='disabled' />
+                </Link>
+            )}
             
         </div>
+        
+    </div>
     );
 };
 

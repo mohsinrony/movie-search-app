@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+
 //const RESULTS_PER_PAGE = 20;
 
 interface Props {
@@ -50,11 +53,13 @@ const PaginationSearch: React.FC<Props> = ({ apiUrl, searchQuery }) => {
             <div className="page-navigation">
                 {currentPage > 1 ? (
                     <Link to={`/search?page=${currentPage - 1}&query=${searchQuery}`}>
-                        <button>Previous</button>
+                        {/* <button>Previous</button> */}
+                        <ArrowBackIosNewOutlinedIcon />
                     </Link>
                 ) : (
                     <Link to={`/search?page=${currentPage}&query=${searchQuery}`} className='disabled'>
-                        <button disabled className='disabled'>Previous</button>
+                        {/* <button disabled className='disabled'>Previous</button> */}
+                        <ArrowBackIosNewOutlinedIcon className='disabled' />
                     </Link>
                 )}
                 <h3>Page {currentPage} of {totalPages} 
@@ -62,11 +67,13 @@ const PaginationSearch: React.FC<Props> = ({ apiUrl, searchQuery }) => {
                 
                 {currentPage < totalPages ? (
                     <Link to={`/search?page=${currentPage + 1}&query=${searchQuery}`}>
-                        <button>Next</button>
+                        {/* <button>Next</button> */}
+                        <ArrowForwardIosOutlinedIcon />
                     </Link>
                 ) : (
                     <Link to={`/search?page=${currentPage}&query=${searchQuery}`} className='disabled'>
-                        <button disabled className='disabled'>Next</button>
+                        {/* <button disabled className='disabled'>Next</button> */}
+                        <ArrowForwardIosOutlinedIcon className='disabled' />
                     </Link>
                 )}
                 
