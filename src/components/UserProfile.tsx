@@ -106,7 +106,7 @@ const UserProfile = () => {
 
   return (
     <div>
-      <h4>Your Details</h4>
+      
       <form>
         <label>
           Display Name:

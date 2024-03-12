@@ -45,8 +45,8 @@ const Dashboard = () => {
       <div id="dashPage">
       <div id='dash'>
         
-        <h2>Dashboard</h2>
-        <h3>Hello {user?.displayName || 'there'}!</h3>
+        <h2>Hello {user?.displayName || 'there'}!</h2>
+        
         {/* <p>Other user details will go here</p> */}
         
 

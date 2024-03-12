@@ -97,7 +97,7 @@ main {
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 1rem;
+  /* padding: 1rem; */
   min-height: calc(100vh - (var(--headerHeight) + var(--footerHeight)) - 5rem);
 }
 
@@ -290,6 +290,10 @@ main {
 }
 
 /* Styles for grid view */
+.movie-list {
+  width: 90%;
+  margin: 0 auto;
+}
 
 .grid-item {
   border: 1px solid #ddd;
@@ -330,7 +334,7 @@ header, footer {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  padding: 5px 0;
+  padding: 10px 0;
   /* background-color: #ccc; */
   background-color: black;
   color: #fff;
@@ -383,20 +387,19 @@ form button {
 
 /* Styles for mainNav */
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  
   width: 250px;
-  /* padding: 15px 0 0 0; */
+  padding: 0;
   background-color: none;
   color: #fff;
 }
 
 nav ul {
   width: 100%;
-  padding: 0;
+  padding: 10px 0 0 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-direction: row;
   gap: 1rem;
   list-style: none;
@@ -770,8 +773,7 @@ iframe {
   margin-bottom: 1rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  color: #535bf2;
-  background-color: #ccc;
+  
 }
 
 #authForm form {
@@ -786,16 +788,14 @@ iframe {
 }
 
 #authForm label {
-  color: #535bf2;
   font-weight: bold;
   padding-right: 1rem;
 }
 
 #authForm input {
   accent-color: #bbb;
-  color: #535bf2;
   background-color: #ccc;
-  border: 1px solid darkslateblue;
+  
   border-radius: 0.25rem;
   padding: 0.25rem 0.5rem;
   margin-bottom: 0.5rem;
@@ -817,13 +817,13 @@ iframe {
 }
 
 #authForm button[type='submit']:hover {
-  background-color: #535bf2;
+  
   color: #f9f9f9;
   border-color: #f9f9f9;
 }
 
 #authForm > button[type='button'] {
-  color: darkslateblue;
+  
   border: 1px solid none;
 }
 
@@ -833,7 +833,7 @@ iframe {
 
 #authForm #authP {
   cursor: pointer;
-  color: darkgreen;
+  color: #444;
   font-weight: bolder;
   margin-top: 1rem;
 }
@@ -879,10 +879,8 @@ iframe {
   text-align: center;
   font-size: 2rem;
   font-weight: bolder;
-  -webkit-text-stroke: 2px;
   margin: 0 auto;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #444;
 }
 
 #dash h3 {
@@ -906,15 +904,13 @@ iframe {
 }
 
 #dash label {
-  color: #535bf2;
   font-weight: bold;
 }
 
 #dash input {
   accent-color: #bbb;
-  color: #535bf2;
   background-color: #ccc;
-  border: 1px solid #535bf2;
+  border: 1px solid #333;
   border-radius: 0.25rem;
   padding: 0.25rem 0.5rem;
   margin-bottom: 0.5rem;
