@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signOut, User } from 'firebase/auth';
 import { auth } from '../firebase';
 
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 
@@ -70,13 +71,16 @@ const Header: React.FC = () => {
               
 
       <form onSubmit={handleSearchSubmit}>
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={handleSearchChange}
-          placeholder="Search movies..."
-          className='searchBar'
-        />
+        <div className="searchBar">
+          <SearchOutlinedIcon />
+          {/* <span className='searchIcon'>&#128269;</span> */}
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            placeholder="Search movies..."
+          />
+        </div>
         {/* <button type="submit">
           <span className="material-symbols-outlined">
           video_search
@@ -97,19 +101,19 @@ const Header: React.FC = () => {
           </li>
         </ul>
       </nav>
-      <div className="userProfile">
-      {user?<>
+      <div>
+      {user?<div className="user-auth">
           <a className='authLink' href={"/dashboard"}>
               <AccountCircleOutlinedIcon />
           </a>
-          <a className='authLink' href={"/auth"} onClick={handleLogout}>Logout</a>
-        </>:
-          <>
+          <a className='authLink-btn' href={"/auth"} onClick={handleLogout}>Logout</a>
+        </div>:
+          <div className="user-auth">
             <a className='authLink' href={"/auth"}>
             <AccountCircleOutlinedIcon />
             </a>
-            <a className='authLink' href={"/auth"}>Login</a>
-          </>
+            <a className='authLink-btn' href={"/auth"}>Login</a>
+          </div>
           
          }
       </div>

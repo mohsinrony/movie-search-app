@@ -17,11 +17,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: black;
   text-decoration: inherit;
 }
-a:hover {
-  color: #535bf2;
+a:hover, .userProfile:hover {
+  color: #999;
 }
 
 body {
@@ -117,7 +117,6 @@ main {
   justify-content: space-between;
   color: #333;
 }
-
 .topBar h1 {
   margin: 0;
   font-size: 3rem;
@@ -130,21 +129,27 @@ main {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
 }
-
+.topBar-btn {
+  display: flex;
+  gap: 1rem;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border: 1px solid #fff;
+  border-radius: 0.5rem;
+}
+.topBar-btn:hover {
+  cursor: pointer;
+  border-color: #333;
+}
 .topBar .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
   'wght' 400,
   'GRAD' 0,
   'opsz' 24;
-  font-size: 3.5rem;
+  font-size: 1.5rem;
   cursor: pointer;
-  color: #535bf2;
   transition: color 0.25s;
-}
-
-.topBar .material-symbols-outlined:hover {
-  color: #ccc;
 }
 
 /* MovieList */
@@ -155,12 +160,19 @@ main {
   width: 70%;
   margin: 0 auto;
 }
-
+.dropdown-container {
+ position: relative; 
+}
+/* .filter-dropdown, .sort-dropdown {
+  /* display: flex; */
+  /*display: none;
+  
+} */
 .filters {
-  display: flex;
+  display: none;
   flex-direction: row;
   gap: 1rem;
-  height: fit-content;
+  /* height: fit-content;
   min-width: 200px;
   width: fit-content;
   border-radius: 0.5rem;
@@ -170,7 +182,18 @@ main {
   align-items: center;
   color: #333;
   border: 4px solid #ddd;
-  position: relative;
+  position: relative; */
+
+  gap: 1rem;
+  position: absolute;
+  
+  left: 0;
+  
+  background-color: #f9f9f9;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .filters .legend {
@@ -211,11 +234,11 @@ main {
   color: #333;
   cursor: pointer;
   transition: border-color 0.25s;
-  border: 1px solid #535bf2;
+  border: 1px solid #333;
 }
 
 .filter select {
-  scrollbar-color: #535bf2 #f9f9f9;
+  scrollbar-color: #333 #f9f9f9;
   scrollbar-width: thin;
   
 }
@@ -302,24 +325,49 @@ main {
 }
 
 /* Styles for header */
-header {
+header, footer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  padding: 1rem;
-  background-color: #ccc;
+  padding: 5px 0;
+  /* background-color: #ccc; */
+  background-color: black;
   color: #fff;
+}
+
+header h1, footer h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: red;
 }
 
 /* Styles for searchBar */
 .searchBar {
+  display: flex;
   align-items: center;
-  padding: 0.5rem;
+  width: 350px;
+  padding: 0.2rem 0.9rem;
   border-radius: 0.4rem;
-  font-size: 1rem;
+  font-size: .5rem;
+  background-color: #333;
+  color: #999;
 }
-
+.searchBar input {
+  width: 90%;
+  padding: 0.3rem;
+  border: none;
+  font-size: .9rem;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: transparent;
+  color: #333;
+}
+.searchBar input:focus {
+  outline: none;
+  color: #fff;
+}
 form button {
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -338,70 +386,57 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  width: 250px;
+  /* padding: 15px 0 0 0; */
   background-color: none;
   color: #fff;
 }
 
 nav ul {
+  width: 100%;
+  padding: 0;
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
   gap: 1rem;
-  list-style: none;;
+  list-style: none;
 }
 
 nav ul li a {
-  color: #333;
+  color: #fff;
   text-decoration: none;
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
 }
-
-/* Styles for Login Menu Item */
-.authLink {
-  align-items: center;
-  color: #535bf2;
-  /* border: 2px solid #535bf2; */
-  padding: 0 0.25rem;
-  padding-bottom: 0.35rem;
-  vertical-align: middle;
-  border-radius: 0.35rem;
-}
-
-.authLink:hover {
-  background-color: #535bf2;
-  color: #f9f9f9;
-}
-
-/* Styles for footer */
-footer {
+.user-auth {
+  width: fit-content;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: #ccc;
-  color: #f9f9f9;
-  height: fit-content;
-  margin-top: 1rem;
+  color: #fff;
 }
+.user-auth a {
+  color: #fff;
+  text-decoration: none;
+  /* font-size: 1.5rem;
+  padding: 0.5rem; */
+}
+.user-auth a:hover {
+  color: #999;
+}
+.authLink-btn {
+  margin-left: 10px;
+}
+/* Styles for footer */
+
 
 footer a {
-  color: #333;
+  color: #fff;
   text-decoration: none;
   font-size: 1.5rem;
   padding: 0.5rem;
 }
-
-.copyRight {
-  font-size: 1.5rem;
-  font-weight: bold;
+footer p {
+  padding: 5px 0 0 0;
 }
-
-.copyRight a {
-  color: #f9f9f9;
-  text-decoration: none;
-}
-
 /* Styles for page-navigation */
 .page-navigation {
   display: flex;
@@ -477,7 +512,7 @@ footer a {
 
 .container hr {
   margin: 0 auto;
-  border: 1px solid #535bf2;
+  border: 1px solid black;
   width: 70%;
 }
 
@@ -494,7 +529,7 @@ footer a {
   width: 100%;
   overflow-x: scroll;
   scrollbar-width: thin;
-  scrollbar-color: #535bf2 #f9f9f9;
+  scrollbar-color: #333 #f9f9f9;
 }
 
 .relatedMovies img {
@@ -525,16 +560,20 @@ iframe {
   border-radius: 4px; /* Rounded corners */
   overflow: hidden; /* Hide overflowing content */
 }
-
+.movie-details  h2 {
+  color: #333;
+}
+.movie-details h2:hover {
+  color: #999;
+}
 .movieDetails .progress-bar, .movie-details .progress-bar {
   width: 280px;
   max-width: 100%;
 }
-
 /* Styles for progress bar */
 .progress {
   height: 100%;
-  background-color: #535bf2; /* Color of the filled portion */
+  background-color: #333; /* Color of the filled portion */
   color: white; /* Text color */
   text-align: center; /* Center the text */
   line-height: 20px; /* Center the text vertically */
@@ -551,34 +590,38 @@ iframe {
 /* Styles for progress bar ends */
 
 /* Styles for carousel */
-.carousel {
+.gallery {
   width: 70%;
   overflow: hidden;
   margin: 0 auto;
 }
-
-.carousel-inner {
+.galleryTitle {
+  border-left: 5px solid red;
+  padding: 0 10px;
+  margin: 10px 0 20px;
+}
+.gallery-inner {
   display: flex;
   transition: transform 0.5s ease;
 }
 
-.carousel-item {
+.gallery-item {
   width: 16%; /* Adjust width to fit your layout */
   flex: 0 0 auto; /* Adjust margin to fit your layout */
   /*padding: 0 0.25px; /* Add padding if needed */
   margin: 0 0.25px; /* Add margin if needed */
 }
 
-.carousel-item img {
+.gallery-item img {
   width: 200px; /* Adjust width as needed */
   height: auto;
 }
 
-.carousel-item h3 {
+.gallery-item h3 {
   margin: 0;
   font-size: 0.8rem;
   text-align: center;
-  color: #535bf2;
+  color: #333;
 }
 /* Carousel ends */
 
@@ -641,8 +684,67 @@ iframe {
 
 .hero-next {
   right: 20px;
+}  
+.heroBtn {
+  margin-left: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background-color: #fff;
+  color: #333;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 18px;
+  font-size: .9em;
+  cursor: pointer;
+  transition: background-color 0.25s;
 }
 /* Hero Banner ends */
+
+/* Styles for carousel */
+/* .carousel {
+  width: 100vw;
+  height: 100vh; 
+  outline: 3px solid yellow;
+ } 
+.carousel .carousel-inner {
+  width: 100%;
+  height: 100%;
+  outline: 3px solid red;
+}
+.carousel .carousel-inner .carousel-item {
+  width: 100%;
+  height: 100%;
+  outline: 3px solid green;
+}*/
+.carousel .carousel-inner .carousel-item img {
+  width: 100%;
+  height: 100%;
+}
+.description {
+  width: 30%;
+  margin: 10px auto;
+}
+/* make the carousel controls visible */
+/* .carousel-control-prev, .carousel-control-next {
+  width: 3%;
+  height: 3%;
+  padding: 20px 10px;
+  background-color: #333; 
+  
+} */
+
+/* vertically center carousel controls in middle of carousel item*/
+/* .carousel-control-prev {
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+}
+.carousel-control-next {
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+} */
+
 
 /* Auth Page start */
 #authPage {
