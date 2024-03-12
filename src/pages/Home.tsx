@@ -4,7 +4,7 @@ import React, {useEffect} from 'react';
 import axios from 'axios';
 import '../styles/MovieList.css';
 //import { Movie } from '../types';
-import Carousel from '../components/Carousel';
+import Gallery from '../components/Gallery';
 import HeroBanner from '../components/HeroBanner';
 
 const Home: React.FC = () => {
@@ -79,10 +79,10 @@ const Home: React.FC = () => {
   return (
     <div className='container'>
       <HeroBanner sourceData={nowPlayingCarousel} />
-      <Carousel title="Trending" sourceData={trendingCarousel} />
-      <Carousel title="Popular" sourceData={popularCarousel} />
-      <Carousel title="Upcoming" sourceData={upcomingCarousel} />
-      <Carousel title="Top Rated" sourceData={topratedCarousel} />
+      <Gallery title="Trending" sourceData={trendingCarousel} />
+      <Gallery title="Popular" sourceData={popularCarousel} />
+      <Gallery title="Upcoming" sourceData={upcomingCarousel} />
+      <Gallery title="Top Rated" sourceData={topratedCarousel} />
     </div>
   );
 };

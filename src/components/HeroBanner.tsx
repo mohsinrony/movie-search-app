@@ -2,6 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Movie } from '../types';
 import { Link } from 'react-router-dom';
 
+import Image from 'react-bootstrap/Image';
+import Carousel from 'react-bootstrap/Carousel';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+
 const HeroBanner: React.FC<{ sourceData: Movie[] }> = ({ sourceData }) => {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -32,24 +38,28 @@ const HeroBanner: React.FC<{ sourceData: Movie[] }> = ({ sourceData }) => {
   const baseimageurl = "https://image.tmdb.org/t/p/original";
 
   return (
-    <div className="hero-banner" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
-      <div className={`hero-carousel ${paused ? 'paused' : ''}`} ref={carouselRef} style={{ transform: `translateX(-${index * 100}%)` }}>
-      {sourceData.map((item, idx) => (
-        <div className="hero-carousel-item" key={idx}>
-            {/* Render your movie content here */}
-            <Link to={`/movie/${item.id}`}>
-                <img src={baseimageurl+item.backdrop_path} alt={item.title} />
-                <h3>{item.title} ({item.release_date.split("-")[0]})</h3>
-                {/* <p>{item.overview}</p> */}
+    <Carousel>
+        {sourceData.map((movie, index) => (
+          <Carousel.Item key={index} interval={2500} >
+            <Image src={baseimageurl+movie.backdrop_path} />
+            <Carousel.Caption>
+              <h2 className='title'>{movie.title}</h2>
+              <p>{movie.release_date.split("-")[0]}</p>
+              <p className='description'>{movie.overview}</p>
+              <button className="heroBtn">
+              <PlayArrowIcon />
+              Watch Trailer
+            </button>
+            <Link to={`/movie/${movie.id}`}>
+              <button className="heroBtn">
+                 View Movie
+                  <NavigateNextIcon />
+              </button>
             </Link>
-        </div>
-      ))}
-      </div>
-      <div className="heroBtns">
-      <button className="hero-prev" onClick={prevSlide}>Previous</button>
-      <button className="hero-next" onClick={nextSlide}>Next</button>
-      </div>
-    </div>
+            </Carousel.Caption>
+          </Carousel.Item>
+        ))}
+      </Carousel>
   );
 };
 
