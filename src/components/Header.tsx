@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signOut, User } from 'firebase/auth';
 import { auth } from '../firebase';
 
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 
 const Header: React.FC = () => {
@@ -61,7 +62,8 @@ const Header: React.FC = () => {
     <header>
       <div>
         <Link to={"/"}>
-        <img src={imageUrl} height="60px" alt="T3MDB" />
+          {/*   <img src={imageUrl} height="60px" alt="T3MDB" /> */}
+          <h1>T3 Movies</h1>
         </Link>
       </div>
 
@@ -90,27 +92,27 @@ const Header: React.FC = () => {
           <li>
             <a href='/movies/1'>Movies</a>
           </li>
-
-          {user?<>
-          <li>
-            <a className='authLink' href={"/dashboard"}>myProfile</a>
-          </li>
-          <li>
-          <a className='authLink' href={"/auth"} onClick={handleLogout}>Logout</a>
-          </li>
-          </>:
-          <li>
-            <a className='authLink' href={"/auth"}>Login</a>
-          </li>
-          
-         }
-
-
           <li>
             <a href={"/about"}>About</a>
           </li>
         </ul>
       </nav>
+      <div className="userProfile">
+      {user?<>
+          <a className='authLink' href={"/dashboard"}>
+              <AccountCircleOutlinedIcon />
+          </a>
+          <a className='authLink' href={"/auth"} onClick={handleLogout}>Logout</a>
+        </>:
+          <>
+            <a className='authLink' href={"/auth"}>
+            <AccountCircleOutlinedIcon />
+            </a>
+            <a className='authLink' href={"/auth"}>Login</a>
+          </>
+          
+         }
+      </div>
     </header>
   );
 };
